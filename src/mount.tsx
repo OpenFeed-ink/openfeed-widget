@@ -5,9 +5,10 @@
  */
 import { createRoot } from "react-dom/client"
 import { Component, type ReactNode } from "react"
-import App from "./App"
 import styles from "./index.css?inline"
 import type { WidgetConfig } from "./types"
+import { ShadowRootProvider } from "./context/shadow-root"
+import { Main } from "./Main"
 
 const DEFAULT_API_URL = "https://api.openfeed.ink"
 
@@ -74,7 +75,9 @@ function mount(rawConfig: RawConfig) {
   const root = createRoot(container)
   root.render(
     <WidgetErrorBoundary>
-      <App config={config} />
+      <ShadowRootProvider shadowRoot={shadowRoot}>
+          <Main />
+      </ShadowRootProvider>
     </WidgetErrorBoundary>
   )
 
