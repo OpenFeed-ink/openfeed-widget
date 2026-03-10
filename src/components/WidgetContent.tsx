@@ -2,13 +2,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FeedbackTab } from "./FeedbackTab"
 import { ChangelogTab } from "./ChangelogTab"
 import { RoadmapTab } from "./RoadmapTab"
-import type { Config } from "../types"
+import type { Config, WidgetConfig } from "../types"
 
 interface WidgetContentProps {
   config: Config
+  widgetConfig: WidgetConfig
 }
 
-export function WidgetContent({ config }: WidgetContentProps) {
+export function WidgetContent({ config, widgetConfig }: WidgetContentProps) {
   return (
     <Tabs defaultValue="feedback" className="w-full">
       <TabsList className="grid w-full grid-cols-3">
@@ -30,7 +31,7 @@ export function WidgetContent({ config }: WidgetContentProps) {
       </TabsList>
       {config.showFeedback && (
         <TabsContent value="feedback">
-          <FeedbackTab />
+          <FeedbackTab projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} />
         </TabsContent>
       )}
       {config.showChangeLog && (

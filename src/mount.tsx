@@ -76,7 +76,7 @@ function mount(rawConfig: RawConfig) {
   root.render(
     <WidgetErrorBoundary>
       <ShadowRootProvider shadowRoot={shadowRoot}>
-          <Main />
+          <Main widgetConfig={config} />
       </ShadowRootProvider>
     </WidgetErrorBoundary>
   )

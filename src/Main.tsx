@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react"
 import App from "./App"
 import { ThemeProvider } from "./components/theme-provider"
-import type { Config } from "./types"
+import type { Config, WidgetConfig } from "./types"
+import { FeatureDialog } from "./components/FeatureDialog"
 // Mock config
 const mockConfig: Config = {
   theme: "dark",
@@ -21,10 +23,32 @@ const mockConfig: Config = {
   showAnnouncement: false,
 }
 
-export const Main = () => {
+export const Main = ({ widgetConfig }: { widgetConfig: WidgetConfig }) => {
+  const [featureId, setFeatureId] = useState<string | null>(null)
+  useEffect(() => {
+    function handler(event: MessageEvent) {
+      if (!event.data) return
+
+      if (event.data.type === "openfeed:open-feature") {
+        setFeatureId(event.data.featureId)
+      }
+    }
+
+    window.addEventListener("message", handler)
+
+    return () => window.removeEventListener("message", handler)
+  }, [])
+
+
   return (
     <ThemeProvider theme={mockConfig.theme} >
-      <App config={mockConfig} />
+      <App config={mockConfig} widgetConfig={widgetConfig} />
+      <FeatureDialog
+        featureId={featureId}
+        widgetConfig={widgetConfig}
+        onFeature={(id) => setFeatureId(id)}
+
+      />
     </ThemeProvider>
   )
 }

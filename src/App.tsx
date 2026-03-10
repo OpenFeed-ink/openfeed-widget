@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle, DrawerHeader, DrawerDescription } from "@/components/ui/drawer"
 import { MessageSquare } from "lucide-react"
 import { WidgetContent } from "./components/WidgetContent"
-import type { Config } from "./types"
+import type { Config, WidgetConfig } from "./types"
 
 
 
@@ -13,7 +13,7 @@ const IconMap = {
   // add more icons as needed
 }
 
-export default function App({ config }: { config: Config }) {
+export default function App({ config, widgetConfig }: { config: Config, widgetConfig: WidgetConfig }) {
 
   const position = config.triggerBtn.position
   const isDrawer = position.startsWith("drawer")
@@ -94,7 +94,7 @@ export default function App({ config }: { config: Config }) {
             <DrawerTitle className="font-semibold text-lg">{config.projectName}</DrawerTitle>
             <DrawerDescription>{config.info || ""}</DrawerDescription>
           </DrawerHeader>
-          <WidgetContent config={config} />
+          <WidgetContent config={config} widgetConfig={widgetConfig} />
         </DrawerContent>
       </Drawer>
     )
@@ -111,7 +111,7 @@ export default function App({ config }: { config: Config }) {
             <h2 className="font-semibold text-lg">{config.projectName}</h2>
             {config.info && <p className="text-sm opacity-90">{config.info}</p>}
           </div>
-          <WidgetContent config={config} />
+          <WidgetContent config={config} widgetConfig={widgetConfig} />
         </PopoverContent>
       </Popover>
     </div>
