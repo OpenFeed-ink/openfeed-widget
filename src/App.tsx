@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle, DrawerHeader, DrawerDescription } from "@/components/ui/drawer"
-import { MessageSquare,Bell, Mail, Heart, Star, ThumbsUp } from "lucide-react"
+import { MessageSquare, Bell, Mail, Heart, Star, ThumbsUp} from "lucide-react"
 import type { Config, WidgetConfig } from "./types"
 import { WidgetContent } from "./components/WidgetContent"
 
@@ -11,7 +11,7 @@ import { WidgetContent } from "./components/WidgetContent"
 const IconMap = {
   "message-square": MessageSquare,
   "bell": Bell,
-  "mail":Mail,
+  "mail": Mail,
   "heart": Heart,
   "star": Star,
   "thumbs-up": ThumbsUp,
@@ -111,7 +111,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
         <PopoverTrigger asChild>
           {renderFloatTrigger()}
         </PopoverTrigger>
-        <PopoverContent className="w-100 h-[60vh] bg-muted p-0 flex flex-col">
+        <PopoverContent className="w-80 md:w-100 h-[60vh] bg-muted p-0 flex flex-col">
           <div className="p-4 border-b">
             <h2 className="font-semibold text-lg">{config.widgetName}</h2>
             {config.info && (
