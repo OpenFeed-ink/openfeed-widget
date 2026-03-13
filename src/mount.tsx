@@ -71,12 +71,12 @@ function mount(rawConfig: RawConfig) {
 
   const container = document.createElement("div")
   shadowRoot.appendChild(container)
-
+  const previewConfig = (window as any).__OPENFEED_PREVIEW_CONFIG
   const root = createRoot(container)
   root.render(
     <WidgetErrorBoundary>
       <ShadowRootProvider shadowRoot={shadowRoot}>
-          <Main widgetConfig={config} />
+        <Main widgetConfig={config} config={previewConfig} />
       </ShadowRootProvider>
     </WidgetErrorBoundary>
   )
@@ -94,6 +94,29 @@ function init() {
     (document.querySelector("script[data-project-id]") as HTMLScriptElement)
 
   if (!script) return
+
+  const _consoleError = console.error
+  console.error = (...args: unknown[]) => {
+    const msg = args[0]
+    if (
+      typeof msg === "string" &&
+      (msg.includes("DialogContent") || msg.includes("Missing `Description`"))
+    ) {
+      return
+    }
+    _consoleError(...args)
+  }
+  const _consoleWarning = console.warn
+  console.warn = (...args:unknown[]) => {
+  const msg = args[0]
+    if (
+      typeof msg === "string" &&
+      (msg.includes("DialogContent") || msg.includes("Missing `Description`"))
+    ) {
+      return
+    }
+    _consoleWarning
+  }
 
   mount({
     projectId: script.dataset.projectId,
