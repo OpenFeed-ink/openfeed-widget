@@ -44,7 +44,7 @@ export function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentP
         <TabsContent value={tab} className="flex-1 overflow-hidden">
           {tab === "feedback" && <FeedbackTab textColor={config.triggerBtn.textColor} bgColor={config.triggerBtn.color} projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} isDrower={isDrawer} theme={config.theme} />}
           {tab === "changelog" && <ChangelogTab />}
-          {tab === "roadmap" && <RoadmapTab />}
+          {tab === "roadmap" && <RoadmapTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
         </TabsContent>
       ))}
     </Tabs>
