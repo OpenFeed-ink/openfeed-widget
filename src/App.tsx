@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle, DrawerHeader, DrawerDescription } from "@/components/ui/drawer"
-import { MessageSquare, Bell, Mail, Heart, Star, ThumbsUp} from "lucide-react"
+import { MessageSquare, Bell, Mail, Heart, Star, ThumbsUp } from "lucide-react"
 import type { Config, WidgetConfig } from "./types"
 import { WidgetContent } from "./components/WidgetContent"
 
@@ -93,8 +93,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
         <DrawerTrigger asChild>
           {renderDrawerTrigger()}
         </DrawerTrigger>
-        <DrawerContent
-          className="bg-muted max-h-screen overflow-auto">
+        <DrawerContent className="bg-muted max-h-screen overflow-auto">
           <DrawerHeader>
             <DrawerTitle className="font-semibold text-lg">{config.widgetName}</DrawerTitle>
             <DrawerDescription>{config.info || ""}</DrawerDescription>
@@ -111,7 +110,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
         <PopoverTrigger asChild>
           {renderFloatTrigger()}
         </PopoverTrigger>
-        <PopoverContent className="w-80 md:w-100 h-[60vh] bg-muted p-0 flex flex-col">
+        <PopoverContent className="w-80 md:w-100 h-[60vh] bg-muted p-0 flex flex-col min-h-0">
           <div className="p-4 border-b">
             <h2 className="font-semibold text-lg">{config.widgetName}</h2>
             {config.info && (
@@ -119,7 +118,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
             )}
           </div>
 
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0">
             <WidgetContent config={config} widgetConfig={widgetConfig} isDrawer={false} />
           </div>
         </PopoverContent>

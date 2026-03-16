@@ -41,9 +41,9 @@ export function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentP
         </TabsTrigger>))}
       </TabsList>
       {tabs.map(tab => (
-        <TabsContent value={tab} className="flex-1 overflow-hidden">
+        <TabsContent value={tab} className="flex-1 min-h-0">
           {tab === "feedback" && <FeedbackTab textColor={config.triggerBtn.textColor} bgColor={config.triggerBtn.color} projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} isDrower={isDrawer} theme={config.theme} />}
-          {tab === "changelog" && <ChangelogTab />}
+          {tab === "changelog" && <ChangelogTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
           {tab === "roadmap" && <RoadmapTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
         </TabsContent>
       ))}
