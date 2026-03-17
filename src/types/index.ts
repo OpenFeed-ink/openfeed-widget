@@ -2,6 +2,16 @@ export interface WidgetConfig {
   projectId: string
   apiUrl: string
 }
+export type AnnouncementConfig = {
+  position: 'top' | 'bottom';
+  text: string;
+  link?: string;
+  dismiss: boolean;
+  bgcolor: string;
+  textcolor: string;
+  actionBtn: string;
+}
+
 export type Config = {
   theme: "dark" | "light" | "system";
   widgetName: string;
@@ -17,4 +27,5 @@ export type Config = {
   showFeedback: boolean;
   showChangeLog: boolean;
   showRoadmap: boolean;
+  announcement?: AnnouncementConfig,
 }

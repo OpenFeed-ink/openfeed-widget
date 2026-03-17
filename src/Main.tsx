@@ -4,6 +4,7 @@ import { ThemeProvider } from "./components/theme-provider"
 import type { Config, WidgetConfig } from "./types"
 import { FeatureDialog } from "./components/FeatureDialog"
 import { OutsideEventProvider } from "./context/outsideEvent"
+import { AnnouncementBanner } from "./components/AnnouncementBanner"
 
 export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, config?: Config }) => {
   const [conf, setConf] = useState<Config>()
@@ -23,10 +24,20 @@ export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, con
 
   if (pending || !conf) return <div />
 
+  const renderAnnouncement = () => {
+    if (!conf?.announcement?.text) return null;
+    return (
+      <AnnouncementBanner
+        key={conf.announcement.text}
+        announcement={conf.announcement}
+      />
+    );
+  };
 
   return (
     <OutsideEventProvider>
       <ThemeProvider theme={conf.theme} >
+        {renderAnnouncement()}
         <App config={conf} widgetConfig={widgetConfig} />
         <FeatureDialog
           theme={conf.theme}

@@ -5,8 +5,6 @@ import { MessageSquare, Bell, Mail, Heart, Star, ThumbsUp } from "lucide-react"
 import type { Config, WidgetConfig } from "./types"
 import { WidgetContent } from "./components/WidgetContent"
 
-
-
 // Icon mapping
 const IconMap = {
   "message-square": MessageSquare,
@@ -81,6 +79,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
       </div>
     )
   }
+
   if (isDrawer) {
     const side = getDrawerSide()
     return (
@@ -105,7 +104,7 @@ export default function App({ config, widgetConfig }: { config: Config, widgetCo
   }
 
   return (
-    <div className={`fixed ${getFloatPositionClasses()}`}>
+    <div className={`fixed ${getFloatPositionClasses()} z-50`}>
       <Popover>
         <PopoverTrigger asChild>
           {renderFloatTrigger()}
