@@ -1,6 +1,7 @@
 export interface WidgetConfig {
   projectId: string
   apiUrl: string
+  prod: boolean
 }
 export type AnnouncementConfig = {
   position: 'top' | 'bottom';

@@ -14,7 +14,8 @@ const DEFAULT_API_URL = "https://api.openfeed.ink"
 
 interface RawConfig {
   projectId?: string
-  apiUrl?: string
+  apiUrl?: string,
+  prod?: string
 }
 
 class WidgetErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -35,6 +36,7 @@ function sanitizeConfig(raw: RawConfig): WidgetConfig {
   return {
     projectId: raw.projectId.trim(),
     apiUrl: raw.apiUrl?.trim() || DEFAULT_API_URL,
+    prod: raw.prod ? raw.prod.toLowerCase() !== "false" : true
   }
 }
 
@@ -107,8 +109,8 @@ function init() {
     _consoleError(...args)
   }
   const _consoleWarning = console.warn
-  console.warn = (...args:unknown[]) => {
-  const msg = args[0]
+  console.warn = (...args: unknown[]) => {
+    const msg = args[0]
     if (
       typeof msg === "string" &&
       (msg.includes("DialogContent") || msg.includes("Missing `Description`"))
@@ -121,6 +123,7 @@ function init() {
   mount({
     projectId: script.dataset.projectId,
     apiUrl: script.dataset.apiUrl,
+    prod: script.dataset.prod,
   })
 }
 

@@ -16,7 +16,7 @@ export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, con
         setConf(config)
         return;
       }
-      const resp = await fetch(`${widgetConfig.apiUrl}/api/projects/${widgetConfig.projectId}/config`)
+      const resp = await fetch(`${widgetConfig.apiUrl}/api/widget/${widgetConfig.projectId}/config`)
       const configJson = await resp.json()
       setConf(configJson)
     })
@@ -35,8 +35,8 @@ export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, con
   };
 
   return (
-    <OutsideEventProvider>
-      <ThemeProvider theme={conf.theme} >
+    <OutsideEventProvider config={widgetConfig}>
+      <ThemeProvider theme={conf.theme}>
         {renderAnnouncement()}
         <App config={conf} widgetConfig={widgetConfig} />
         <FeatureDialog

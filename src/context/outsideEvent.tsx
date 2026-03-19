@@ -1,3 +1,4 @@
+import type { WidgetConfig } from "@/types"
 import { createContext, useContext, useEffect, useState, type Dispatch, type SetStateAction } from "react"
 
 type OutsideEventType = {
@@ -5,19 +6,24 @@ type OutsideEventType = {
   setFeatureId: Dispatch<SetStateAction<string | null>>,
   newFeatureOpen: boolean,
   setNewFeatureOpen: Dispatch<SetStateAction<boolean>>,
-  iframeKey: number
+  iframeKey: number,
+  setReady: (ready: boolean) => void,
+  ready: boolean,
 }
 
 const OutsideEventContext = createContext<OutsideEventType | null>(null)
 
 export function OutsideEventProvider({
+  config,
   children,
 }: {
   children: React.ReactNode
+  config: WidgetConfig,
 }) {
   const [featureId, setFeatureId] = useState<string | null>(null)
   const [newFeatureOpen, setNewFeatureOpen] = useState(false)
   const [iframeKey, setIframeKey] = useState(0);
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     function handler(event: MessageEvent) {
@@ -37,6 +43,12 @@ export function OutsideEventProvider({
     return () => window.removeEventListener("message", handler)
   }, [])
 
+  useEffect(() => {
+    if (ready && config.prod) {
+      navigator.sendBeacon(`${config.apiUrl}/api/widget/${config.projectId}/activity`)
+    }
+  }, [ready])
+
 
   return (
     <OutsideEventContext.Provider value={{
@@ -44,7 +56,9 @@ export function OutsideEventProvider({
       setFeatureId,
       newFeatureOpen,
       setNewFeatureOpen,
-      iframeKey
+      iframeKey,
+      setReady,
+      ready,
     }}>
       {children}
     </OutsideEventContext.Provider>

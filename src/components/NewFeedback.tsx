@@ -1,5 +1,4 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import type { WidgetConfig } from "@/types"
 import { Button } from "./ui/button"
 import { Plus } from "lucide-react"
 import { useOutsideEvent } from "@/context/outsideEvent"
@@ -13,7 +12,7 @@ export function NewFeatureDialog({
   theme: string,
   backgroundColor: string,
   color: string,
-  widgetConfig: WidgetConfig,
+  widgetConfig: { apiUrl: string, projectId: string },
 }) {
   const { newFeatureOpen, setNewFeatureOpen } = useOutsideEvent()
 
