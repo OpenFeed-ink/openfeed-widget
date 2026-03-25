@@ -81,13 +81,12 @@ export function mount(rawConfig: RawConfig) {
 
   const container = document.createElement("div")
   shadowRoot.appendChild(container)
-  const previewConfig = (window as any).__OPENFEED_PREVIEW_CONFIG
 
   const root = createRoot(container)
   root.render(
     <WidgetErrorBoundary>
       <ShadowRootProvider shadowRoot={shadowRoot}>
-        <Main widgetConfig={config} config={previewConfig} />
+        <Main widgetConfig={config} />
       </ShadowRootProvider>
     </WidgetErrorBoundary>
   )

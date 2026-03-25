@@ -1,8 +1,42 @@
 {
   "name": "@openfeed/widget",
+  "description": "Embeddable feedback, roadmap and changelog widget for OpenFeed — the open source alternative to Canny and Frill. One script tag. Full control from your dashboard.",
+  "author": {
+    "name": "Ali Amer",
+    "email": "aliamer19ali@gmail.com",
+    "url": "https://openfeed.ink"
+  },
+  "license": "AGPL-3.0-only",
+  "homepage": "https://openfeed.ink",
   "main": "./dist/npm/index.js",
   "module": "./dist/npm/index.js",
   "types": "./dist/npm/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenFeed-ink/openfeed-widget"
+  },
+  "bugs": {
+    "url": "https://github.com/OpenFeed-ink/openfeed-widget/issues"
+  },
+  "keywords": [
+    "feedback",
+    "feedback-widget",
+    "changelog",
+    "roadmap",
+    "feature-requests",
+    "upvoting",
+    "canny-alternative",
+    "frill-alternative",
+    "open-source",
+    "self-hosted",
+    "user-feedback",
+    "product-feedback",
+    "saas",
+    "widget",
+    "embeddable",
+    "react",
+    "typescript"
+  ],
   "exports": {
     ".": {
       "import": "./dist/npm/index.js",
@@ -11,7 +45,8 @@
   },
   "files": [
     "dist/npm",
-    "dist/cdn"
+    "README.md",
+    "LICENSE"
   ],
   "private": false,
   "version": "0.0.1",
