@@ -20,7 +20,7 @@ yarn add @openfeed/widget
 
 **Prefer a script tag?**
 ```html
-<script async src="https://openfeed.ink/widget.js" data-project-id="your-project-id"></script>
+<script async src="https://cdn.openfeed.ink/widget/v1/widget.iife.js" data-project-id="your-project-id"></script>
 ```
 
 ---
@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
 ```html
 <script
   async
-  src="https://cdn.openfeed.ink/widget.js"
+  src="https://cdn.openfeed.ink/widget/v1/widget.iife.js"
   data-project-id="your-project-id">
 </script>
 ```
