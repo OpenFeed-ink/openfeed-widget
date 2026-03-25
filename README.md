@@ -3,8 +3,8 @@
 **Embeddable feedback, roadmap and changelog widget.**  
 Part of [OpenFeed](https://openfeed.ink) — the open source alternative to Canny and Frill.
 
-[![npm](https://img.shields.io/npm/v/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed/widget)
-[![npm downloads](https://img.shields.io/npm/dm/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed/widget)
+[![npm](https://img.shields.io/npm/v/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
+[![npm downloads](https://img.shields.io/npm/dm/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
 
 ---
 
