@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { OpenFeed } from "@openfeed/widget"
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -59,11 +58,7 @@ export default function Home() {
             Documentation
           </a>
         </div>
-      </main>
-      <OpenFeed
-        projectId="ShQyxCnubmpQnTr5986T2"
-        apiUrl="http://localhost:3000"
-      />
+      </main> 
     </div>
   );
 }
