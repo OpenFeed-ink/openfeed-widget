@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import type { AnnouncementConfig } from '@/types';
 
 
-export function AnnouncementBanner({ announcement }: { announcement: AnnouncementConfig }) {
+export default function AnnouncementBanner({ announcement }: { announcement: AnnouncementConfig }) {
   const [visible, setVisible] = useState(true);
   const bannerRef = useRef<HTMLDivElement>(null);
   const { position, text, link, dismiss, bgcolor, textcolor } = announcement;

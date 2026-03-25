@@ -1,10 +1,11 @@
-import { useEffect, useState, useTransition } from "react"
+import { lazy, useEffect, useState, useTransition, Suspense } from "react"
 import App from "./App"
 import { ThemeProvider } from "./components/theme-provider"
 import type { Config, WidgetConfig } from "./types"
-import { FeatureDialog } from "./components/FeatureDialog"
 import { OutsideEventProvider } from "./context/outsideEvent"
-import { AnnouncementBanner } from "./components/AnnouncementBanner"
+
+const AnnouncementBanner = lazy(() => import("./components/AnnouncementBanner"))
+const FeatureDialog = lazy(() => import("./components/FeatureDialog"))
 
 export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, config?: Config }) => {
   const [conf, setConf] = useState<Config>()
@@ -39,10 +40,12 @@ export const Main = ({ widgetConfig, config }: { widgetConfig: WidgetConfig, con
       <ThemeProvider theme={conf.theme}>
         {renderAnnouncement()}
         <App config={conf} widgetConfig={widgetConfig} />
-        <FeatureDialog
-          theme={conf.theme}
-          widgetConfig={widgetConfig}
-        />
+        <Suspense fallback={null}>
+          <FeatureDialog
+            theme={conf.theme}
+            widgetConfig={widgetConfig}
+          />
+        </Suspense>
       </ThemeProvider>
     </OutsideEventProvider>
 

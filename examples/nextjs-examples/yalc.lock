@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "@openfeed/widget": {
+      "signature": "35a82ca0e44fe1e599d356ec4e4957af",
+      "file": true
+    }
+  }
+}

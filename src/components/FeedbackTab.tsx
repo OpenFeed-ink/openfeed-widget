@@ -1,7 +1,7 @@
 import { useOutsideEvent } from "@/context/outsideEvent";
 import { NewFeatureDialog } from "./NewFeedback";
 
-export function FeedbackTab(config: { apiUrl: string, projectId: string, isDrower: boolean, theme: string, textColor: string, bgColor: string }) {
+export default function FeedbackTab(config: { apiUrl: string, projectId: string, isDrower: boolean, theme: string, textColor: string, bgColor: string }) {
   const { iframeKey, ready, setReady } = useOutsideEvent()
   return (
     <div className="h-full w-full flex flex-col space-y-3 justify-center items-center">

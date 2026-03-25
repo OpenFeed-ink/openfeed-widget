@@ -1,9 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { FeedbackTab } from "./FeedbackTab"
-import { ChangelogTab } from "./ChangelogTab"
-import { RoadmapTab } from "./RoadmapTab"
+
 import type { Config, WidgetConfig } from "../types"
-import { useMemo } from "react"
+import { lazy, Suspense, useMemo } from "react"
+const FeedbackTab = lazy(() => import("./FeedbackTab"))
+const ChangelogTab = lazy(() => import("./ChangelogTab"))
+const RoadmapTab = lazy(() => import("./RoadmapTab"))
 
 interface WidgetContentProps {
   config: Config
@@ -11,7 +12,7 @@ interface WidgetContentProps {
   isDrawer: boolean,
 }
 
-export function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentProps) {
+export default function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentProps) {
 
   const tabs = useMemo(() => {
     const tabs = []
@@ -42,9 +43,11 @@ export function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentP
       </TabsList>
       {tabs.map(tab => (
         <TabsContent value={tab} className="flex-1 min-h-0">
-          {tab === "feedback" && <FeedbackTab textColor={config.triggerBtn.textColor} bgColor={config.triggerBtn.color} projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} isDrower={isDrawer} theme={config.theme} />}
-          {tab === "changelog" && <ChangelogTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
-          {tab === "roadmap" && <RoadmapTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
+          <Suspense fallback={null}>
+            {tab === "feedback" && <FeedbackTab textColor={config.triggerBtn.textColor} bgColor={config.triggerBtn.color} projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} isDrower={isDrawer} theme={config.theme} />}
+            {tab === "changelog" && <ChangelogTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
+            {tab === "roadmap" && <RoadmapTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
+          </Suspense>
         </TabsContent>
       ))}
     </Tabs>

@@ -2,7 +2,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { useOutsideEvent } from "@/context/outsideEvent"
 import type { WidgetConfig } from "@/types"
 
-export function FeatureDialog({
+export default function FeatureDialog({
   widgetConfig,
   theme,
 }: {

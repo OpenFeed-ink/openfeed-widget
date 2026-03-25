@@ -1,7 +1,7 @@
 /**
  * OpenFeed Widget — CSP requirements:
- *   script-src:  https://cdn.openfeed.ai
- *   connect-src: https://api.openfeed.ai
+ *   script-src:  https://cdn.openfeed.ink
+ *   connect-src: https://app.openfeed.ink
  */
 import { createRoot } from "react-dom/client"
 import { Component, type ReactNode } from "react"
@@ -10,7 +10,7 @@ import type { WidgetConfig } from "./types"
 import { ShadowRootProvider } from "./context/shadow-root"
 import { Main } from "./Main"
 
-const DEFAULT_API_URL = "https://api.openfeed.ink"
+const DEFAULT_API_URL = "https://app.openfeed.ink"
 
 interface RawConfig {
   projectId?: string
@@ -40,7 +40,31 @@ function sanitizeConfig(raw: RawConfig): WidgetConfig {
   }
 }
 
-function mount(rawConfig: RawConfig) {
+export function mount(rawConfig: RawConfig) {
+  if (typeof window === "undefined") return;
+
+  const _consoleError = console.error
+  console.error = (...args: unknown[]) => {
+    const msg = typeof args[0] === "string" ? args[0] : ""
+    if (
+      msg.includes("DialogContent") ||
+      msg.includes("Missing `Description`") ||
+      msg.includes("unique \"key\" prop")
+    ) return
+    _consoleError(...args)
+  }
+
+  const _consoleWarning = console.warn
+  console.warn = (...args: unknown[]) => {
+    const msg = typeof args[0] === "string" ? args[0] : ""
+    if (
+      msg.includes("DialogContent") ||
+      msg.includes("Missing `Description`") ||
+      msg.includes("unique \"key\" prop")
+    ) return
+    _consoleWarning(...args)
+  }
+
   // Prevent double mount
   if (document.getElementById("openfeed-widget-host")) {
     console.warn("[OpenFeedWidget] Already mounted, skipping.")
@@ -74,6 +98,7 @@ function mount(rawConfig: RawConfig) {
   const container = document.createElement("div")
   shadowRoot.appendChild(container)
   const previewConfig = (window as any).__OPENFEED_PREVIEW_CONFIG
+
   const root = createRoot(container)
   root.render(
     <WidgetErrorBoundary>
@@ -97,40 +122,17 @@ function init() {
 
   if (!script) return
 
-  const _consoleError = console.error
-  console.error = (...args: unknown[]) => {
-    const msg = args[0]
-    if (
-      typeof msg === "string" &&
-      (msg.includes("DialogContent") || msg.includes("Missing `Description`"))
-    ) {
-      return
-    }
-    _consoleError(...args)
-  }
-  const _consoleWarning = console.warn
-  console.warn = (...args: unknown[]) => {
-    const msg = args[0]
-    if (
-      typeof msg === "string" &&
-      (msg.includes("DialogContent") || msg.includes("Missing `Description`"))
-    ) {
-      return
-    }
-    _consoleWarning
-  }
-
   mount({
     projectId: script.dataset.projectId,
     apiUrl: script.dataset.apiUrl,
     prod: script.dataset.prod,
   })
 }
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init)
-} else {
-  init()
+if (typeof window !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init)
+  } else {
+    init()
+  }
+  ; (window as any).OpenFeedWidget = { mount }
 }
-
-; (window as any).OpenFeedWidget = { mount }
