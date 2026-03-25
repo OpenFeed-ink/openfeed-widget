@@ -23,7 +23,6 @@ function DialogPortal({
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
-
 function DialogOverlay({
   className,
   ...props
@@ -68,8 +67,7 @@ function DialogContent({
               className="absolute top-2 right-2"
               size="icon-sm"
             >
-              <XIcon
-              />
+              <XIcon />
               <span className="sr-only">Close</span>
             </Button>
           </DialogPrimitive.Close>
@@ -79,12 +77,38 @@ function DialogContent({
   )
 }
 
+function DialogTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Title>) {
+  return (
+    <DialogPrimitive.Title
+      data-slot="dialog-title"
+      className={cn("text-base font-medium text-foreground", className)}
+      {...props}
+    />
+  )
+}
 
+function DialogDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Description>) {
+  return (
+    <DialogPrimitive.Description
+      data-slot="dialog-description"
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
 
 export {
   Dialog,
   DialogContent,
   DialogOverlay,
   DialogPortal,
+  DialogTitle,
+  DialogDescription,
   DialogTrigger,
 }

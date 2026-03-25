@@ -9,11 +9,14 @@ const RoadmapTab = lazy(() => import("./RoadmapTab"))
 interface WidgetContentProps {
   config: Config
   widgetConfig: WidgetConfig
-  isDrawer: boolean,
+  isDrawer: boolean
 }
 
-export default function WidgetContent({ config, widgetConfig, isDrawer }: WidgetContentProps) {
-
+export default function WidgetContent({
+  config,
+  widgetConfig,
+  isDrawer,
+}: WidgetContentProps) {
   const tabs = useMemo(() => {
     const tabs = []
     if (config.showFeedback) {
@@ -32,21 +35,54 @@ export default function WidgetContent({ config, widgetConfig, isDrawer }: Widget
     1: "grid-cols-1",
     2: "grid-cols-2",
     3: "grid-cols-3",
-  };
+  }
 
   return (
-    <Tabs defaultValue={tabs[0]} className="flex flex-col h-full">
+    <Tabs defaultValue={tabs[0]} className="flex h-full flex-col">
       <TabsList className={`grid w-full ${gridCols[tabs.length]}`}>
-        {tabs.map(tab => (<TabsTrigger value={tab} className="capitalize">
-          {tab}
-        </TabsTrigger>))}
+        {tabs.map((tab) => (
+          <TabsTrigger
+            key={`trigger-${tab}`}
+            value={tab}
+            className="capitalize"
+          >
+            {tab}
+          </TabsTrigger>
+        ))}
       </TabsList>
-      {tabs.map(tab => (
-        <TabsContent value={tab} className="flex-1 min-h-0">
+      {tabs.map((tab) => (
+        <TabsContent
+          key={`content-${tab}`}
+          value={tab}
+          className="min-h-0 flex-1"
+        >
           <Suspense fallback={null}>
-            {tab === "feedback" && <FeedbackTab textColor={config.triggerBtn.textColor} bgColor={config.triggerBtn.color} projectId={widgetConfig.projectId} apiUrl={widgetConfig.apiUrl} isDrower={isDrawer} theme={config.theme} />}
-            {tab === "changelog" && <ChangelogTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
-            {tab === "roadmap" && <RoadmapTab apiUrl={widgetConfig.apiUrl} projectId={widgetConfig.projectId} theme={config.theme} isDrower={isDrawer} />}
+            {tab === "feedback" && (
+              <FeedbackTab
+                textColor={config.triggerBtn.textColor}
+                bgColor={config.triggerBtn.color}
+                projectId={widgetConfig.projectId}
+                apiUrl={widgetConfig.apiUrl}
+                isDrawer={isDrawer}
+                theme={config.theme}
+              />
+            )}
+            {tab === "changelog" && (
+              <ChangelogTab
+                apiUrl={widgetConfig.apiUrl}
+                projectId={widgetConfig.projectId}
+                theme={config.theme}
+                isDrawer={isDrawer}
+              />
+            )}
+            {tab === "roadmap" && (
+              <RoadmapTab
+                apiUrl={widgetConfig.apiUrl}
+                projectId={widgetConfig.projectId}
+                theme={config.theme}
+                isDrawer={isDrawer}
+              />
+            )}
           </Suspense>
         </TabsContent>
       ))}

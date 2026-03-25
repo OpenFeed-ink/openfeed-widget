@@ -14,13 +14,18 @@ const DEFAULT_API_URL = "https://app.openfeed.ink"
 
 interface RawConfig {
   projectId?: string
-  apiUrl?: string,
+  apiUrl?: string
   prod?: string
 }
 
-class WidgetErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+class WidgetErrorBoundary extends Component<
+  { children: ReactNode },
+  { error: Error | null }
+> {
   state = { error: null }
-  static getDerivedStateFromError(error: Error) { return { error } }
+  static getDerivedStateFromError(error: Error) {
+    return { error }
+  }
   componentDidCatch(error: Error) {
     console.error("[OpenFeedWidget] Error caught, unmounting cleanly.", error)
   }
@@ -36,41 +41,18 @@ function sanitizeConfig(raw: RawConfig): WidgetConfig {
   return {
     projectId: raw.projectId.trim(),
     apiUrl: raw.apiUrl?.trim() || DEFAULT_API_URL,
-    prod: raw.prod ? raw.prod.toLowerCase() !== "false" : true
+    prod: raw.prod ? raw.prod.toLowerCase() !== "false" : true,
   }
 }
 
 export function mount(rawConfig: RawConfig) {
-  if (typeof window === "undefined") return;
-
-  const _consoleError = console.error
-  console.error = (...args: unknown[]) => {
-    const msg = typeof args[0] === "string" ? args[0] : ""
-    if (
-      msg.includes("DialogContent") ||
-      msg.includes("Missing `Description`") ||
-      msg.includes("unique \"key\" prop")
-    ) return
-    _consoleError(...args)
-  }
-
-  const _consoleWarning = console.warn
-  console.warn = (...args: unknown[]) => {
-    const msg = typeof args[0] === "string" ? args[0] : ""
-    if (
-      msg.includes("DialogContent") ||
-      msg.includes("Missing `Description`") ||
-      msg.includes("unique \"key\" prop")
-    ) return
-    _consoleWarning(...args)
-  }
+  if (typeof window === "undefined") return
 
   // Prevent double mount
   if (document.getElementById("openfeed-widget-host")) {
     console.warn("[OpenFeedWidget] Already mounted, skipping.")
     return
   }
-
 
   let config: WidgetConfig
   try {
@@ -81,7 +63,9 @@ export function mount(rawConfig: RawConfig) {
   }
 
   if (!config.projectId) {
-    console.error("[OpenFeedWidget] Missing or invalid data-project-id, aborting.")
+    console.error(
+      "[OpenFeedWidget] Missing or invalid data-project-id, aborting."
+    )
     return
   }
 
@@ -109,10 +93,14 @@ export function mount(rawConfig: RawConfig) {
   )
 
   // Cleanup on unload
-  window.addEventListener("unload", () => {
-    root.unmount()
-    host.remove()
-  }, { once: true })
+  window.addEventListener(
+    "unload",
+    () => {
+      root.unmount()
+      host.remove()
+    },
+    { once: true }
+  )
 }
 
 function init() {
@@ -134,5 +122,5 @@ if (typeof window !== "undefined") {
   } else {
     init()
   }
-  ; (window as any).OpenFeedWidget = { mount }
+  ;(window as any).OpenFeedWidget = { mount }
 }
