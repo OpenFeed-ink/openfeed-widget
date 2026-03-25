@@ -30,13 +30,13 @@ yarn add @openfeed/widget
 ### React
 
 ```tsx
-import { OpenFeedWidget } from '@openfeed/widget'
+import { OpenFeed } from '@openfeed-ink/widget'
 
 export default function App() {
   return (
     <>
       <YourApp />
-      <OpenFeedWidget projectId="your-project-id" />
+      <OpenFeed projectId="your-project-id" />
     </>
   )
 }
@@ -46,14 +46,14 @@ export default function App() {
 
 ```tsx
 // app/layout.tsx
-import { OpenFeedWidget } from '@openfeed/widget'
+import { OpenFeed } from '@openfeed-ink/widget'
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
         {children}
-        <OpenFeedWidget projectId="your-project-id" />
+        <OpenFeed projectId="your-project-id" />
       </body>
     </html>
   )
@@ -114,7 +114,7 @@ All other configuration (colors, theme, position, enabled tabs) is managed from 
 Fully typed. No `@types` package needed.
 
 ```tsx
-import { OpenFeedWidget } from '@openfeed/widget'
+import { OpenFeed } from '@openfeed-ink/widget'
 // Types are included — no extra install required
 ```
 
@@ -135,7 +135,7 @@ The widget renders inside a Shadow DOM container. This means:
 
 1. Create a free account at [openfeed.ink](https://openfeed.ink)
 2. Create a project and copy your project slug
-3. Install this package and add `<OpenFeedWidget projectId="your-slug" />`
+3. Install this package and add `<OpenFeed projectId="your-project-id" />`
 4. Customize everything from your dashboard
 
-**Or self-host OpenFeed for free** → [github.com/yourusername/openfeed](https://github.com/OpenFeed-ink/openfeed)
+**Or self-host OpenFeed for free** → [github.com/OpenFeed-ink/openfeed](https://github.com/OpenFeed-ink/openfeed)
