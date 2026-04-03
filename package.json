@@ -1,6 +1,6 @@
 {
   "name": "@openfeed-ink/widget",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Embeddable feedback, roadmap and changelog widget for OpenFeed — the open source alternative to Canny and Frill. One script tag. Full control from your dashboard.",
   "author": {
     "name": "Ali Amer",
@@ -50,7 +50,6 @@
     "LICENSE"
   ],
   "private": false,
-  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",

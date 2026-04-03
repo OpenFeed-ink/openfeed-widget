@@ -1,21 +1,21 @@
-# @openfeed/widget
+# @openfeed-ink/widget
 
 **Embeddable feedback, roadmap and changelog widget.**  
 Part of [OpenFeed](https://openfeed.ink) — the open source alternative to Canny and Frill.
 
-[![npm](https://img.shields.io/npm/v/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
-[![npm downloads](https://img.shields.io/npm/dm/@openfeed/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
+[![npm](https://img.shields.io/npm/v/@openfeed-ink/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
+[![npm downloads](https://img.shields.io/npm/dm/@openfeed-ink/widget?color=6366f1)](https://www.npmjs.com/package/@openfeed-ink/widget)
 
 ---
 
 ## Install
 
 ```bash
-npm install @openfeed/widget
+npm install @openfeed-ink/widget
 # or
-pnpm add @openfeed/widget
+pnpm add @openfeed-ink/widget
 # or
-yarn add @openfeed/widget
+yarn add @openfeed-ink/widget
 ```
 
 **Prefer a script tag?**
